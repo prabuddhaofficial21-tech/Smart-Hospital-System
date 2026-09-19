@@ -37,3 +37,37 @@ void displayMenu(void) {
     printf("---------------------------------------------------------\n");
     printf("  > Please select an option (1-5): ");
 }
+
+void registerPatient(void) {
+    if (patient_count >= MAX_PATIENTS) {
+        printf("\n  [!] System is currently at maximum patient capacity.\n");
+        return;
+    }
+    int i = patient_count;
+
+    printf("\n=========================================================\n");
+    printf("                  PATIENT REGISTRATION\n");
+    printf("=========================================================\n");
+
+    printf("  > Full Name: ");
+    scanf(" %[^\n]s", p_names[i]);
+
+    printf("  > Age (Years): ");
+    scanf("%d", &p_ages[i]);
+
+    printf("\n  --- Triage Assessment ---\n");
+    printf("  [1] Normal\n  [2] Urgent\n  [3] Critical\n");
+    printf("  > Select Urgency Level (1-3): ");
+    scanf("%d", &p_urgency[i]);
+
+    printf("\n  --- Department Routing ---\n");
+    printf("  [1] General Practice (OPD)\n  [2] Paediatrics\n");
+    printf("  [3] Cardiology\n  [4] Neurology\n");
+    printf("  > Select Specialty ID (1-4): ");
+    scanf("%d", &p_spec[i]);
+
+    printf("\n  --- Ward Admission ---\n");
+    int isAdmitted;
+    printf("  > Does the patient require ward admission? (1=Yes, 0=No): ");
+    scanf("%d", &isAdmitted);
+
