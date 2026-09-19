@@ -25,4 +25,4 @@ The system utilizes **Parallel 1D Arrays** to maintain patient records concurren
 ## Installation & Execution
 1. Clone this repository to your local machine:
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/Smart-Hospital-System.git](https://github.com/YOUR_USERNAME/Smart-Hospital-System.git)
+   git clone [https://github.com/prabuddhaofficial21-tech/Smart-Hospital-System.git](https://github.com/prabuddhaofficial21-tech/Smart-Hospital-System.git)

@@ -71,3 +71,29 @@ void registerPatient(void) {
     printf("  > Does the patient require ward admission? (1=Yes, 0=No): ");
     scanf("%d", &isAdmitted);
 
+    int allocated_bed = -1;
+    if (isAdmitted == 1) {
+        printf("  [1] General Ward\n  [2] Paediatric Ward\n");
+        printf("  [3] Surgical Ward\n  [4] ICU\n");
+        printf("  > Select Ward ID (1-4): ");
+        scanf("%d", &p_ward[i]);
+        printf("  > Estimated Days Admitted: ");
+        scanf("%d", &p_days[i]);
+
+        int w_idx = p_ward[i] - 1;
+        for (int b = 0; b < WARD_CAPACITIES[w_idx]; b++) {
+            if (bedOccupancy[w_idx][b] == 0) {
+                bedOccupancy[w_idx][b] = 1;
+                allocated_bed = b + 1;
+                break;
+            }
+        }
+        if (allocated_bed == -1) {
+            printf("\n  [!] Warning: No beds currently available in %s.\n", WARD_NAMES[w_idx]);
+        } else {
+            printf("\n  [+] Successfully allocated Bed #%02d in %s.\n", allocated_bed, WARD_NAMES[w_idx]);
+        }
+    } else {
+        p_ward[i] = 0;
+        p_days[i] = 0;
+    }
