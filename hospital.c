@@ -9,3 +9,12 @@ const int WARD_CAPACITIES[NUM_WARDS] = {20, 10, 10, 5};
 const char* SPEC_NAMES[NUM_SPECIALTIES] = {"General Practice (OPD)", "Paediatrics", "Cardiology", "Neurology"};
 const char* WARD_NAMES[NUM_WARDS] = {"General Ward", "Paediatric Ward", "Surgical Ward", "ICU"};
 
+// Array Definitions
+char p_names[MAX_PATIENTS][50];
+int p_ages[MAX_PATIENTS], p_urgency[MAX_PATIENTS], p_spec[MAX_PATIENTS];
+int p_ward[MAX_PATIENTS], p_days[MAX_PATIENTS];
+float p_gross[MAX_PATIENTS], p_discount[MAX_PATIENTS], p_final[MAX_PATIENTS];
+
+int patient_count = 0;
+int spec_queue[NUM_SPECIALTIES] = {0};
+int bedOccupancy[NUM_WARDS][20] = {0};
