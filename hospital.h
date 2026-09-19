@@ -31,3 +31,16 @@ extern int patient_count;
 extern int spec_queue[NUM_SPECIALTIES];
 extern int bedOccupancy[NUM_WARDS][20];
 
+// Function Prototypes
+void initializeSystem(void);
+void displayMenu(void);
+void registerPatient(void);
+void displayBedMatrix(void);
+void sortByPriority(void);
+void displayPriorityList(void);
+void generateReports(void);
+void saveBedsToFile(void);
+void loadBedsFromFile(void);
+void appendPatientRecordToFile(int index);
+
+#endif
