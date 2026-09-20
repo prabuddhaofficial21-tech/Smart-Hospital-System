@@ -182,4 +182,25 @@ void registerPatient(void) {
     patient_count++;
 }
 
+    void displayBedMatrix(void) {
+    printf("\n========================================================================================================\n");
+    printf("                                  HOSPITAL BED OCCUPANCY MATRIX\n");
+    printf("========================================================================================================\n");
+    for (int w = 0; w < NUM_WARDS; w++) {
+        printf(" %-16s | ", WARD_NAMES[w]);
+        for (int b = 0; b < WARD_CAPACITIES[w]; b++) {
+            if (bedOccupancy[w][b] == 1)
+                printf("[X] ");
+            else
+                printf("[O] ");
+        }
+        printf("\n");
+    }
+    printf("--------------------------------------------------------------------------------------------------------\n");
+    printf(" Legend: [O] = Available   [X] = Occupied\n");
+    printf("========================================================================================================\n");
+}
+
+
+
 
