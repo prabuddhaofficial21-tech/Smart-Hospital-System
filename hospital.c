@@ -287,6 +287,26 @@ void registerPatient(void) {
     printf("=========================================================\n");
 }
 
+    void saveBedsToFile(void) {
+    FILE *fp = fopen("beds_status.txt", "w");
+    if (!fp) return;
+    for (int w = 0; w < NUM_WARDS; w++) {
+        for (int b = 0; b < WARD_CAPACITIES[w]; b++) {
+            fprintf(fp, "%d ", bedOccupancy[w][b]);
+        }
+        fprintf(fp, "\n");
+    }
+    fclose(fp);
+    printf("\n  [+] Bed statuses successfully saved to 'beds_status.txt'.\n");
+}
+
+    void appendPatientRecordToFile(int i) {
+    FILE *fp = fopen("patient_records.txt", "a");
+    if (!fp) return;
+    fprintf(fp, "PAT-%d | %-20s | Age: %02d | Urgency: %d | Bill: LKR %.2f\n", 1001 + i, p_names[i], p_ages[i], p_urgency[i], p_final[i]);
+    fclose(fp);
+}
+
 
 
 
