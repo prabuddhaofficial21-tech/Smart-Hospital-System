@@ -97,3 +97,16 @@ void registerPatient(void) {
         p_ward[i] = 0;
         p_days[i] = 0;
     }
+
+    int s_idx = p_spec[i] - 1;
+    float base_fee = BASE_FEES[s_idx];
+    float surcharge = 0.0;
+    int surcharge_pct = 0;
+
+    if (p_urgency[i] == 2) { surcharge = base_fee * 0.20; surcharge_pct = 20; }
+    else if (p_urgency[i] == 3) { surcharge = base_fee * 0.50; surcharge_pct = 50; }
+
+    float ward_cost = (p_ward[i] > 0) ? (p_days[i] * WARD_RATES[p_ward[i] - 1]) : 0.0;
+    p_gross[i] = base_fee + surcharge + ward_cost;
+
+
