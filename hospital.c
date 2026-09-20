@@ -248,7 +248,44 @@ void registerPatient(void) {
     printf("=========================================================\n");
 }
 
+    void generateReports(void) {
+    if (patient_count == 0) {
+        printf("\n  [!] Insufficient data to generate reports.\n");
+        return;
+    }
 
+    int lvl1 = 0, lvl2 = 0, lvl3 = 0;
+    float total_revenue = 0, total_discount = 0;
+    int max_idx = 0;
+
+    for (int i = 0; i < patient_count; i++) {
+        if (p_urgency[i] == 1) lvl1++;
+        else if (p_urgency[i] == 2) lvl2++;
+        else if (p_urgency[i] == 3) lvl3++;
+
+        total_revenue += p_final[i];
+        total_discount += p_discount[i];
+
+        if (p_final[i] > p_final[max_idx]) max_idx = i;
+    }
+
+    printf("\n=========================================================\n");
+    printf("            PERFORMANCE REPORTS & ANALYTICS\n");
+    printf("=========================================================\n");
+    printf("  --- Triage Breakdown ---\n");
+    printf("  Normal Cases (Level 1)   : %d\n", lvl1);
+    printf("  Urgent Cases (Level 2)   : %d\n", lvl2);
+    printf("  Critical Cases (Level 3) : %d\n", lvl3);
+    printf("---------------------------------------------------------\n");
+    printf("  --- Financial Summary ---\n");
+    printf("  Total Revenue Collected  : LKR %.2f\n", total_revenue);
+    printf("  Total Subsidies Granted  : LKR %.2f\n", total_discount);
+    printf("---------------------------------------------------------\n");
+    printf("  --- Highest Paying Patient ---\n");
+    printf("  Name                     : %s\n", p_names[max_idx]);
+    printf("  Total Bill               : LKR %.2f\n", p_final[max_idx]);
+    printf("=========================================================\n");
+}
 
 
 
