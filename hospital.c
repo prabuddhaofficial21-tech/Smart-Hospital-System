@@ -116,3 +116,70 @@ void registerPatient(void) {
     float wait_time = spec_queue[s_idx] * CONSULT_TIMES[s_idx];
     spec_queue[s_idx]++;
 
+    printf("\n=========================================================\n");
+    printf("             SMART HOSPITAL ADMISSION & BILL\n");
+    printf("=========================================================\n");
+    printf("%-23s: PAT-%d\n", "Patient ID", 1001 + i);
+    printf("%-23s: %s\n", "Patient Name", p_names[i]);
+
+    if (subsidy_eligible) {
+        printf("%-23s: %d Years (15%% Subsidy Eligible)\n", "Age", p_ages[i]);
+    } else {
+        printf("%-23s: %d Years\n", "Age", p_ages[i]);
+    }
+
+    printf("%-23s: %s\n", "Specialty", SPEC_NAMES[s_idx]);
+
+    if (p_ward[i] > 0 && allocated_bed != -1) {
+        printf("%-23s: %s (Bed #%02d)\n", "Assigned Ward", WARD_NAMES[p_ward[i]-1], allocated_bed);
+    } else {
+        printf("%-23s: N/A (Outpatient)\n", "Assigned Ward");
+    }
+
+    const char* urgency_str = (p_urgency[i] == 1) ? "Level 1 (Normal)" : (p_urgency[i] == 2) ? "Level 2 (Urgent)" : "Level 3 (Critical)";
+    printf("%-23s: %s\n", "Urgency Level", urgency_str);
+    printf("---------------------------------------------------------\n");
+
+    printf("%-23s: LKR %.2f\n", "Base Consultation Fee", base_fee);
+
+    if (surcharge > 0) {
+        printf("%-23s: LKR %.2f (%d%%)\n", "Emergency Surcharge", surcharge, surcharge_pct);
+    } else {
+        printf("%-23s: LKR 0.00\n", "Emergency Surcharge");
+    }
+
+    char ward_cost_lbl[50];
+    if (p_ward[i] > 0) {
+        sprintf(ward_cost_lbl, "Ward Stay Cost (%d Days)", p_days[i]);
+        printf("%-23s: LKR %.2f\n", ward_cost_lbl, ward_cost);
+        printf("---------------------------------------------------------\n");
+    } else {
+        printf("%-23s: LKR 0.00\n", "Ward Stay Cost (0 Days)");
+        printf("---------------------------------------------------------\n");
+    }
+
+    printf("%-23s: LKR %.2f\n", "Gross Total Bill", p_gross[i]);
+
+    if (subsidy_eligible) {
+        printf("%-23s: LKR -%.2f (15%%)\n", "Age Subsidy Discount", p_discount[i]);
+        printf("---------------------------------------------------------\n");
+    } else {
+        printf("%-23s: LKR 0.00\n", "Age Subsidy Discount");
+        printf("---------------------------------------------------------\n");
+    }
+
+    printf("%-23s: LKR %.2f\n", "Final Payable Amount", p_final[i]);
+
+    if (wait_time == 0) {
+        printf("%-23s: 0.00 mins (Immediate Attention)\n", "Estimated Waiting Time");
+        printf("=========================================================\n");
+    } else {
+        printf("%-23s: %.2f mins\n", "Estimated Waiting Time", wait_time);
+        printf("=========================================================\n");
+    }
+
+    appendPatientRecordToFile(i);
+    patient_count++;
+}
+
+
