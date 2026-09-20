@@ -109,4 +109,10 @@ void registerPatient(void) {
     float ward_cost = (p_ward[i] > 0) ? (p_days[i] * WARD_RATES[p_ward[i] - 1]) : 0.0;
     p_gross[i] = base_fee + surcharge + ward_cost;
 
+    int subsidy_eligible = (p_ages[i] < 5 || p_ages[i] > 65) ? 1 : 0;
+    p_discount[i] = subsidy_eligible ? (p_gross[i] * 0.15) : 0.0;
+    p_final[i] = p_gross[i] - p_discount[i];
+
+    float wait_time = spec_queue[s_idx] * CONSULT_TIMES[s_idx];
+    spec_queue[s_idx]++;
 
