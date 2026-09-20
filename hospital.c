@@ -201,6 +201,32 @@ void registerPatient(void) {
     printf("========================================================================================================\n");
 }
 
+    void sortByPriority(void) {
+    for (int i = 0; i < patient_count - 1; i++) {
+        int max_idx = i;
+        for (int j = i + 1; j < patient_count; j++) {
+            if (p_urgency[j] > p_urgency[max_idx]) {
+                max_idx = j;
+            }
+        }
+        if (max_idx != i) {
+            char temp_name[50];
+            strcpy(temp_name, p_names[i]); strcpy(p_names[i], p_names[max_idx]); strcpy(p_names[max_idx], temp_name);
+
+            int temp;
+            temp = p_ages[i]; p_ages[i] = p_ages[max_idx]; p_ages[max_idx] = temp;
+            temp = p_urgency[i]; p_urgency[i] = p_urgency[max_idx]; p_urgency[max_idx] = temp;
+            temp = p_spec[i]; p_spec[i] = p_spec[max_idx]; p_spec[max_idx] = temp;
+            temp = p_ward[i]; p_ward[i] = p_ward[max_idx]; p_ward[max_idx] = temp;
+            temp = p_days[i]; p_days[i] = p_days[max_idx]; p_days[max_idx] = temp;
+
+            float temp_f;
+            temp_f = p_gross[i]; p_gross[i] = p_gross[max_idx]; p_gross[max_idx] = temp_f;
+            temp_f = p_discount[i]; p_discount[i] = p_discount[max_idx]; p_discount[max_idx] = temp_f;
+            temp_f = p_final[i]; p_final[i] = p_final[max_idx]; p_final[max_idx] = temp_f;
+        }
+    }
+}
 
 
 
