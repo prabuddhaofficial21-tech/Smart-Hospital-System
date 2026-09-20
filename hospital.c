@@ -229,4 +229,27 @@ void registerPatient(void) {
 }
 
 
+    void displayPriorityList(void) {
+    sortByPriority();
+    printf("\n=========================================================\n");
+    printf("                EMERGENCY TRIAGE QUEUE\n");
+    printf("=========================================================\n");
+
+    if (patient_count == 0) {
+        printf("  No patients currently in the queue.\n");
+    } else {
+        printf("  #  | %-20s | %-10s | %-10s\n", "Patient Name", "Urgency", "Payable (LKR)");
+        printf("---------------------------------------------------------\n");
+        for (int i = 0; i < patient_count; i++) {
+            const char* urg_lbl = (p_urgency[i] == 3) ? "CRITICAL" : (p_urgency[i] == 2) ? "URGENT" : "NORMAL";
+            printf(" %02d. | %-20s | %-10s | %.2f\n", i + 1, p_names[i], urg_lbl, p_final[i]);
+        }
+    }
+    printf("=========================================================\n");
+}
+
+
+
+
+
 
