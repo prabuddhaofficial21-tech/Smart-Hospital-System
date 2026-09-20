@@ -307,6 +307,20 @@ void registerPatient(void) {
     fclose(fp);
 }
 
+    void loadBedsFromFile(void) {
+    FILE *fp = fopen("beds_status.txt", "r");
+    if (!fp) return;
+    for (int w = 0; w < NUM_WARDS; w++) {
+        for (int b = 0; b < WARD_CAPACITIES[w]; b++) {
+            if (fscanf(fp, "%d", &bedOccupancy[w][b]) != 1)
+                break;
+        }
+    }
+    fclose(fp);
+    printf("  [+] Previous bed statuses successfully loaded.\n");
+}
+
+
 
 
 
